@@ -1,66 +1,174 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Backend do Sistema para Pagamentos usando API Asaas
+Este é Backend para integrar com a API do Asaas, uma plataforma de pagamentos. O sistema permite realizar operações como buscar clientes, criar clientes, criar cobranças, receber pagamentos via boleto, cartã de crédito e gera QR Codes para pagamentos via Pix. A integração é feita através de chamadas HTTP usando a biblioteca Guzzle.
+O Frontend foi desenvolvido em Vue e é necessario para o funcionamento da interface do sistema.
 
-## About Laravel
+## Requisitos
+PHP 8.0 ou superior
+Composer
+Node.js e npm (opcional, para gerenciamento de dependências)
+GuzzleHTTP
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Instalação BACKEND
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. Clone o repositório:   
+        git clone https://github.com/lucaasbritto/perfect_pay.git
 
-## Learning Laravel
+2. Acesse o diretório do projeto:
+    cd seu-repositorio
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+3. Configure o arquivo .env:
+    Renomeie o arquivo .env.example para .env e configure as variáveis de ambiente conforme necessário,
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+4. Insira sua chave Token do Asaas no arquivo .env:
+    ASAAS_ACCESS_TOKEN = 'seu_token'
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+5. Gere a chave de aplicativo do Laravel:
+    php artisan key:generate
 
-## Laravel Sponsors
+7. Inicie o servidor local:
+    php artisan serve
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Instalação FRONTEND
 
-## Contributing
+1. Clone o repositório:   
+        git clone https://github.com/lucaasbritto/pay_front.git
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+2. Navegue até o diretório do projeto:
+    cd seu-repositorio
 
-## Code of Conduct
+3. Instale as dependências:
+    npm install
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+4. Inicie o servidor
+    npm run serve
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Configuração do GuzzleHTTP
+O serviço AsaasService usa o GuzzleHTTP para fazer solicitações à API do Asaas. O cliente Guzzle é configurado no construtor do serviço para usar a URL base da API do Asaas e incluir o token de acesso necessário.
+
+
+
+## ENDPOINT DA API
+
+
+### Buscar Cliente
+
+- **URL:** `GET /customers`
+- **Descrição:** Busca um cliente na API do Asaas pelo CPF ou CNPJ fornecido
+- **Parâmetros:** $customerId (string): CPF ou CNPJ do cliente.
+- **Resposta:**    
+    Array com os dados do cliente ou null em caso de erro.
+
+
+### Criar Cliente
+
+- **URL:** `POST /customers`
+- **Descrição:** Cria um novo cliente na API do Asaas com os dados fornecidos.
+- **Parâmetros:** $data (array): Dados do cliente para criação.
+- **Resposta:**    
+    Array com os dados do cliente criado ou uma mensagem de erro em caso de falha.
+
+
+### Criar Cobrança
+
+- **URL:** `POST /payments`
+- **Descrição:** Cria uma nova cobrança na API do Asaas com os dados fornecidos.
+- **Parâmetros:**$data (array): Dados da cobrança para criação.
+- **Resposta:**    
+    Array com os dados da cobrança criada ou uma mensagem de erro em caso de falha.
+
+
+### Gerar Pix Qr Code
+
+- **URL:** `POST /payments/{$paymentId}/pixQrCode`
+- **Descrição:** Gera um QR Code para pagamento via Pix para uma cobrança existente.
+- **Parâmetros:** $paymentId (string): ID da cobrança para gerar o QR Code.
+- **Resposta:**    
+   Array com os dados do QR Code gerado ou uma mensagem de erro em caso de falha.
+
+
+### EXEMPLO DE USO
+
+```php
+
+    use App\Services\AsaasService;
+
+    $asaasService = new AsaasService();
+
+    // Buscar Cliente
+    $client = $asaasService->getClient('12345678900');
+    print_r($client);
+
+    // Criar Cliente
+    $newClientData = [
+        'name' => 'João da Silva',
+        'cpfCnpj' => '12345678900',
+        'email' => 'joao.silva@example.com',
+    ];
+    $newClient = $asaasService->createClient($newClientData);
+    print_r($newClient);
+
+    // Criar Cobrança
+    $paymentData = [
+        'billingType' => 'BOLETO',
+        'customer' => '12345678900',
+        'value' => 100.00,
+        'dueDate' => '2024-12-31',
+    ];
+    $payment = $asaasService->createPayment($paymentData);
+    print_r($payment);
+
+    // Gerar Pix QR Code
+    $qrCode = $asaasService->getPixQrCode('payment_id_example');
+    print_r($qrCode);
+
+```
+
+
+### Listar Usuários com Carteira
+
+- **URL:** `GET /api/walletUsers`
+- **Descrição:** Retorna a lista de usuários que possuem carteiras.
+- **Resposta:**
+    ```json
+    [
+        {
+            "id": 1,
+            "name": "João",
+            "email": "joao@example.com"
+        },
+        {
+            "id": 2,
+            "name": "Maria",
+            "email": "maria@example.com"
+        }
+    ]
+    ```
+
+### Criar Nova Carteira
+
+- **URL:** `POST /api/wallet-create`
+- **Descrição:** Cria uma nova carteira para o usuário logado.
+- **Requisição:**
+    ```json
+    {
+        "name": "Minha Nova Carteira",
+        "initial_balance": 100
+    }
+    ```
+- **Resposta:**
+    ```json
+    {
+        "id": 3,
+        "cod": "0003",
+        "name": "Minha Nova Carteira",
+        "balance": 100
+    }
+    ```
