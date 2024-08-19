@@ -12,8 +12,10 @@ GuzzleHTTP
 
 ## Instalação BACKEND
 
-1. Clone o repositório:   
-        git clone https://github.com/lucaasbritto/perfect_pay.git
+1. Clone o repositório:
+```bash    
+    git clone https://github.com/lucaasbritto/perfect_pay.git
+```
 
 2. Acesse o diretório do projeto:
     cd seu-repositorio
@@ -34,8 +36,10 @@ GuzzleHTTP
 
 ## Instalação FRONTEND
 
-1. Clone o repositório:   
-        git clone https://github.com/lucaasbritto/pay_front.git
+1. Clone o repositório:
+```bash   
+    git clone https://github.com/lucaasbritto/pay_front.git
+```
 
 2. Navegue até o diretório do projeto:
     cd seu-repositorio
@@ -131,44 +135,3 @@ O serviço AsaasService usa o GuzzleHTTP para fazer solicitações à API do Asa
 
 ```
 
-
-### Listar Usuários com Carteira
-
-- **URL:** `GET /api/walletUsers`
-- **Descrição:** Retorna a lista de usuários que possuem carteiras.
-- **Resposta:**
-    ```json
-    [
-        {
-            "id": 1,
-            "name": "João",
-            "email": "joao@example.com"
-        },
-        {
-            "id": 2,
-            "name": "Maria",
-            "email": "maria@example.com"
-        }
-    ]
-    ```
-
-### Criar Nova Carteira
-
-- **URL:** `POST /api/wallet-create`
-- **Descrição:** Cria uma nova carteira para o usuário logado.
-- **Requisição:**
-    ```json
-    {
-        "name": "Minha Nova Carteira",
-        "initial_balance": 100
-    }
-    ```
-- **Resposta:**
-    ```json
-    {
-        "id": 3,
-        "cod": "0003",
-        "name": "Minha Nova Carteira",
-        "balance": 100
-    }
-    ```
